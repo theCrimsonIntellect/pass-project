@@ -1,0 +1,79 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution 
+{
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        // points to the l1 list
+        ListNode firstList;
+    
+        // points to the l2 list
+        ListNode secondList;
+    
+        // points to the head of merged linked lists.
+        ListNode head = null;
+       
+        // pointers to the first nodes of each linked list.
+        firstList = l1;
+        secondList = l2;
+        
+        // the head of the final merged linked list.
+        head = null;
+        
+        // to trace or traverse each node.
+        ListNode tmp = null;
+        
+        // then the q lis is sorted
+        if ( firstList == null )
+            return secondList;
+        
+        // then the p list is sorted
+        if ( secondList == null )
+            return firstList;
+        
+       // to point the head to the beginning of the list
+        if ( firstList != null && secondList != null) {
+            
+            if ( firstList.val <= secondList.val ) {
+                tmp = firstList;
+                firstList = tmp.next;
+            }
+            else if ( secondList.val >= firstList.val ) {
+                tmp = secondList;
+                secondList = tmp.next;
+            }
+        }
+        
+        // link the head pointer to the tmp (node tracer)
+        head = tmp;
+        
+        // traverse each node to merge the nodes
+        while( firstList != null && secondList != null ) {
+            if ( firstList.val <= secondList.val ) {
+                tmp.next = firstList;
+                tmp = firstList;
+                firstList = tmp.next;
+            }
+            else {
+                tmp.next = secondList;
+                tmp = secondList;
+                secondList = tmp.next;
+            }
+            
+            // once the next is null
+            if ( firstList == null ) tmp.next = secondList;
+            if ( secondList == null ) tmp.next = firstList;
+                        
+        } // end of while loop.
+        
+        // return the final sorted and merged linked lists.
+        return head;
+
+    } // end of the mergeTwoLists method.
+    
+} // end of this class.
